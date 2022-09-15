@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All The Fishes</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+  </head>
+  <body>
+    <script>
+      //The App
+      const app = new PIXI.Application({
+        width: 640,
+        height: 480,
+        backgroundColor: 0x77ccff,
+      });
+
+      //Give us the view
+      document.body.appendChild(app.view);
+
+      // Fish Tank
+
+      // Seaweed
+
+      const my_sprite = PIXI.Sprite.from('img/seaweed.png');
+      my_sprite.scale.set(0.2);
+      my_sprite.x = 60;
+      my_sprite.y = 400;
+      my_sprite.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite);
+
+      const my_sprite2 = PIXI.Sprite.from('img/seaweed_2.png');
+      my_sprite2.scale.set(0.1);
+      my_sprite2.x = 550;
+      my_sprite2.y = 424;
+      my_sprite2.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite2);
+
+      // Coral
+
+      const my_sprite3 = PIXI.Sprite.from('img/coral.png');
+      my_sprite3.scale.set(0.3);
+      my_sprite3.x = 320;
+      my_sprite3.y = 435;
+      my_sprite3.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite3);
+
+      // Anchor
+
+      const my_sprite4 = PIXI.Sprite.from('img/anchor.png');
+      my_sprite4.scale.set(0.1);
+      my_sprite4.x = 450;
+      my_sprite4.y = 405;
+      my_sprite4.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite4);
+
+      //Our fish
+      const my_sprite5 = PIXI.Sprite.from('img/fish.png');
+      my_sprite5.scale.set(0.2);
+      my_sprite5.x = 100;
+      my_sprite5.y = 250;
+      my_sprite5.tint = 0xff0000;
+      my_sprite5.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite5);
+
+      //Fish 2
+
+      const my_sprite6 = PIXI.Sprite.from('img/fish_2.png');
+      my_sprite6.scale.set(0.1);
+      my_sprite6.x = 520;
+      my_sprite6.y = 270;
+      my_sprite6.tint = 0xff00f0;
+      my_sprite6.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite6);
+
+      //Fish 3
+
+      const my_sprite7 = PIXI.Sprite.from('img/fish_3.png');
+      my_sprite7.scale.set(-0.2, 0.2);
+      my_sprite7.x = 100;
+      my_sprite7.y = 60;
+      my_sprite7.tint = 0xffbf00;
+      my_sprite7.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite7);
+
+      //Fish 4
+
+      const my_sprite8 = PIXI.Sprite.from('img/fish_4.png');
+      my_sprite8.scale.set(0.3);
+      my_sprite8.x = 500;
+      my_sprite8.y = 150;
+      my_sprite8.tint = 0x68ff00;
+      my_sprite8.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite8);
+
+      //Disco Ball
+
+      const my_sprite9 = PIXI.Sprite.from('img/disco.png');
+      my_sprite9.scale.set(0.1);
+      my_sprite9.x = 300;
+      my_sprite9.y = 50;
+      my_sprite9.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite9);
+
+      //Light 1
+
+      const my_sprite10 = PIXI.Sprite.from('img/light.png');
+      my_sprite10.scale.set(0.8);
+      my_sprite10.x = 100;
+      my_sprite10.y = 220;
+      my_sprite10.tint = 0xff00f0;
+      my_sprite10.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite10);
+
+      //Light 2
+
+      const my_sprite11 = PIXI.Sprite.from('img/light.png');
+      my_sprite11.scale.set(0.8);
+      my_sprite11.x = 300;
+      my_sprite11.y = 220;
+      my_sprite11.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite11);
+
+      //Light 3
+
+      const my_sprite12 = PIXI.Sprite.from('img/light.png');
+      my_sprite12.scale.set(0.8);
+      my_sprite12.x = 500;
+      my_sprite12.y = 220;
+      my_sprite12.tint = 0xff0000;
+      my_sprite12.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite12);
+
+      //Diver
+
+      const my_sprite13 = PIXI.Sprite.from('img/diver.png');
+      my_sprite13.scale.set(0.1);
+      my_sprite13.x = 300;
+      my_sprite13.y = 250;
+      my_sprite13.anchor.set(0.5);
+
+      app.stage.addChild(my_sprite13);
+
+      // Create fish container
+
+      const my_container = new PIXI.Container();
+
+      // Create seaweed container
+
+      const my_container2 = new PIXI.Container();
+
+      // Create light container
+
+      const my_container3 = new PIXI.Container();
+
+      // Add containers to stage
+      app.stage.addChild(my_container);
+      app.stage.addChild(my_container2);
+      app.stage.addChild(my_container3);
+
+      // Add seaweed to container
+      my_container2.addChild(my_sprite);
+      my_container2.addChild(my_sprite2);
+
+      // Add fish to container
+      my_container.addChild(my_sprite5);
+      my_container.addChild(my_sprite6);
+
+      // Add light to container
+      my_container3.addChild(my_sprite10);
+      my_container3.addChild(my_sprite11);
+      my_container3.addChild(my_sprite12);
+
+      let loop = () => {
+        let time = Date.now();
+        let wobble = Math.sin(time / 1000) * 50;
+
+        my_container.y = wobble;
+
+        requestAnimationFrame(loop);
+      };
+
+      let loop_2 = () => {
+        let time = Date.now();
+        let wobble2 = Math.sin(time / 1000) * 10;
+
+        my_container2.x = wobble2;
+
+        requestAnimationFrame(loop_2);
+      };
+
+      let loop_3 = () => {
+        let time = Date.now();
+        let wobble3 = Math.sin(time / 1000) * 5;
+
+        my_sprite4.angle = wobble3;
+
+        requestAnimationFrame(loop_3);
+      };
+
+      let loop_4 = () => {
+        let time = Date.now();
+        let wobble4 = Math.sin(time / 1000) * 40;
+
+        my_sprite8.angle = wobble4;
+
+        requestAnimationFrame(loop_4);
+      };
+
+      let loop_5 = () => {
+        let time = Date.now();
+        let wobble5 = Math.sin(time / 1000) * 40;
+
+        my_sprite7.angle = wobble5;
+
+        requestAnimationFrame(loop_5);
+      };
+
+      let loop_6 = () => {
+        let time = Date.now();
+        let wobble = Math.sin(time / 1000) * 100;
+
+        my_container3.alpha = wobble;
+
+        requestAnimationFrame(loop_6);
+      };
+
+      let loop_7 = () => {
+        let time = Date.now();
+        let wobble = Math.sin(time / 1000) * 300;
+
+        my_sprite13.angle = wobble;
+
+        requestAnimationFrame(loop_7);
+      };
+
+      loop();
+      loop_2();
+      loop_3();
+      loop_4();
+      loop_5();
+      loop_6();
+      loop_7();
+    </script>
+  </body>
+</html>
