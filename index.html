@@ -196,36 +196,44 @@
 
       let loop_2 = () => {
         let time = Date.now();
-        let wobble2 = Math.sin(time / 1000) * 10;
+        let wobble = Math.sin(time / 1000) * 10;
 
-        my_container2.x = wobble2;
+        my_container2.x = wobble;
 
         requestAnimationFrame(loop_2);
       };
 
       let loop_3 = () => {
         let time = Date.now();
-        let wobble3 = Math.sin(time / 1000) * 5;
+        let wobble = Math.sin(time / 1000) * 5;
 
-        my_sprite4.angle = wobble3;
+        my_sprite4.angle = wobble;
 
         requestAnimationFrame(loop_3);
       };
 
       let loop_4 = () => {
         let time = Date.now();
-        let wobble4 = Math.sin(time / 1000) * 40;
+        let wobble = Math.sin(time / 1000) * 40;
 
-        my_sprite8.angle = wobble4;
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+        my_sprite8.angle = wobble;
+
+        my_sprite8.tint = randomColor;
 
         requestAnimationFrame(loop_4);
       };
 
       let loop_5 = () => {
         let time = Date.now();
-        let wobble5 = Math.sin(time / 1000) * 40;
+        let wobble = Math.sin(time / 1000) * 40;
+        let wobble2 = Math.sin(time / 1000) * 80;
+        let option;
 
-        my_sprite7.angle = wobble5;
+        my_sprite7.angle = wobble;
+
+        my_sprite7.x = wobble2;
 
         requestAnimationFrame(loop_5);
       };
