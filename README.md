@@ -31,3 +31,7 @@ Code for changing color of fish:
 Code Author: Chris Coyier
 
 [RandomColor](https://css-tricks.com/snippets/javascript/random-hex-color/)
+
+## Coding Strategy
+
+All the sprites were added before the loops. For sprites with similar animations, such as the seaweed and lights, I added them to different containers, then applied properties to the containers, so code could be minimized. For the sprites with distinct animations, they were animated in their own seperate loops.
