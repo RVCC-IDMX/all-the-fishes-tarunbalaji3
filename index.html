@@ -14,7 +14,7 @@
       const app = new PIXI.Application({
         width: 640,
         height: 480,
-        backgroundColor: 0x77ccff,
+        backgroundColor: 0x151e3d,
       });
 
       //Give us the view
@@ -81,7 +81,7 @@
 
       app.stage.addChild(my_sprite6);
 
-      //Fish 3
+      //Fish 3 - Draggable
 
       const my_sprite7 = PIXI.Sprite.from('img/fish_3.png');
       my_sprite7.scale.set(-0.2, 0.2);
@@ -216,11 +216,9 @@
         let time = Date.now();
         let wobble = Math.sin(time / 1000) * 40;
 
-        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
         my_sprite8.angle = wobble;
 
-        my_sprite8.tint = randomColor;
+        // my_sprite8.tint = randomColor;
 
         requestAnimationFrame(loop_4);
       };
@@ -229,11 +227,10 @@
         let time = Date.now();
         let wobble = Math.sin(time / 1000) * 40;
         let wobble2 = Math.sin(time / 1000) * 80;
-        let option;
 
         my_sprite7.angle = wobble;
 
-        my_sprite7.x = wobble2;
+        // my_sprite7.x = wobble2;
 
         requestAnimationFrame(loop_5);
       };
@@ -263,6 +260,106 @@
       loop_5();
       loop_6();
       loop_7();
+
+      // Change Color Button
+
+      function makeButton() {
+        // Build a container
+        let ourButton = new PIXI.Container();
+        ourButton.interactive = true;
+
+        // Create button body
+        let buttonBody = new PIXI.Graphics();
+        buttonBody.beginFill(0x000000);
+        // buttonBody.drawRect(0, 0, 200, 100);
+        buttonBody.drawRoundedRect(0, 0, 200, 95, 50);
+
+        ourButton.addChild(buttonBody);
+
+        ourButton.body = buttonBody;
+
+        let buttonText = new PIXI.Text('Random Color');
+        buttonText.anchor.set(0.5, 0.5);
+        buttonText.x = buttonBody.width / 2;
+        buttonText.y = buttonBody.height / 2;
+
+        // Button styling
+
+        buttonText.style.fill = 0xff00ff;
+        buttonText.style.fontFamily = 'Georgia';
+
+        ourButton.addChild(buttonText);
+
+        ourButton.label = buttonText;
+
+        ourButton.on('pointertap', (e) => {
+          console.log(e);
+          let color = 0xffffff * Math.random();
+          // buttonBody.tint = color;
+          my_sprite8.tint = color;
+        });
+
+        ourButton.on('pointerover', function (e) {
+          ourButton.alpha = 0.8;
+        });
+        ourButton.on('pointerout', function (e) {
+          ourButton.alpha = 1.0;
+        });
+
+        return ourButton;
+      }
+
+      // Draggable Fish
+
+      function fishButton() {
+        // Build a container
+        let ourButton = new PIXI.Container();
+        ourButton.interactive = true;
+
+        // Create button body
+        let buttonBody = my_sprite7;
+
+        ourButton.addChild(buttonBody);
+
+        ourButton.body = buttonBody;
+
+        // Draggable event listeners
+        ourButton.dragging = false;
+        offsetX = 0;
+        offsetY = 0;
+
+        ourButton.on('pointerdown', function (e) {
+          ourButton.dragging = true;
+          offsetX = ourButton.x - e.data.global.x;
+          offsetY = ourButton.y - e.data.global.y;
+        });
+
+        ourButton.on('pointermove', function (e) {
+          if (ourButton.dragging) {
+            console.log(e);
+            ourButton.x = e.data.global.x + offsetX;
+            ourButton.y = e.data.global.y + offsetY;
+          }
+        });
+
+        ourButton.on('pointerup', function (e) {
+          ourButton.dragging = false;
+        });
+
+        return ourButton;
+      }
+
+      let button = makeButton();
+      button.x = 180;
+      button.y = 360;
+
+      app.stage.addChild(button);
+
+      let dragFish = fishButton();
+      dragFish.x = 30;
+      dragFish.y = 20;
+
+      app.stage.addChild(dragFish);
     </script>
   </body>
 </html>
