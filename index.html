@@ -150,7 +150,7 @@
       const my_sprite13 = PIXI.Sprite.from('img/diver.png');
       my_sprite13.scale.set(0.1);
       my_sprite13.x = 300;
-      my_sprite13.y = 250;
+      my_sprite13.y = 200;
       my_sprite13.anchor.set(0.5);
 
       app.stage.addChild(my_sprite13);
@@ -360,6 +360,80 @@
       dragFish.y = 20;
 
       app.stage.addChild(dragFish);
+
+      // Slider
+
+      function makeSlider() {
+        //Container
+        let ourButton = new PIXI.Container();
+        ourButton.interactive = true;
+
+        //Value from 0.0 to 1.0
+        ourButton.value = 0;
+
+        //The track
+        let theTrack = new PIXI.Graphics();
+        theTrack.beginFill(0x00FFFF);
+        theTrack.drawRect(0, -10, 180, 20);
+
+        ourButton.addChild(theTrack);
+
+        //The slide
+        let theSlide = new PIXI.Graphics();
+        theSlide.interactive = true;
+        theSlide.beginFill(0xFF10F0);
+        theSlide.drawRect(-25, -25, 50, 50);
+
+        ourButton.addChild(theSlide);
+
+        //Add event listeners
+        //Draggable event listeners
+        //Draggin on or off
+        theSlide.dragging = false;
+        //Pointer down
+        theSlide.on('pointerdown', function (e) {
+          theSlide.dragging = true;
+        });
+        theSlide.on('pointermove', function (e) {
+          if (theSlide.dragging) {
+            let newX = e.data.global.x - ourButton.getGlobalPosition().x;
+            let newY = e.data.global.y - ourButton.getGlobalPosition().y;
+
+            /*
+                console.log(
+                        Math.round(e.data.global.x),
+                        Math.round(e.data.global.y),
+                        Math.round(newX), 
+                        Math.round(newY),
+                        ourButton.getGlobalPosition());
+                */
+
+            if (newX > theTrack.width) newX = theTrack.width;
+            if (newX < 0) newX = 0;
+
+            ourButton.value = newX / theTrack.width;
+
+            theSlide.x = newX;
+
+            my_sprite6.scale.set(ourButton.value/10);
+            console.log(ourButton.value);
+          }
+        });
+        //Pointer up
+        theSlide.on('pointerup', function (e) {
+          theSlide.dragging = false;
+        });
+        theSlide.on('pointerupoutside', function (e) {
+          theSlide.dragging = false;
+        });
+
+        return ourButton;
+      }
+
+      let ourSlider = makeSlider();
+      ourSlider.y = 300;
+      ourSlider.x = 230;
+      app.stage.addChild(ourSlider);
     </script>
   </body>
 </html>
