@@ -193,10 +193,25 @@
 
             //Begin the loop!
             loop();
-            loopTint();
-            loopScale();
-            loopAlpha()
-            loopAngle();
+            // loopTint();
+            // loopScale();
+            // loopAlpha()
+            // loopAngle();
+
+            // async function idleSwim1() {
+            //     await Animate.to(my_sprite5,{
+            //         x:300,y:320,
+            //         duration:2000,
+            //         easing:Animate.easeInOut
+            //     });
+            //     await Animate.to(my_sprite5,{
+            //         x:300,y:280,
+            //         duration:2000,
+            //         easing:Animate.easeInOut
+            //     });
+            //     idleSwim1();
+            // }
+            // idleSwim1();
 
         //End Promise
         });
@@ -210,6 +225,14 @@
         await Animate.to( my_sprite5,{x:200,y:200,duration:2000});
         moveAround();
     };
+
+    let idleSwim1 = async () => {
+        Animate.from( my_sprite5,{x:100,y:250});
+        await Animate.to( my_sprite5,{x:300,y:320,duration:2000});
+        await Animate.to( my_sprite5,{x:300,y:280,duration:2000});
+        await Animate.to( my_sprite5,{x:100,y:250,duration:2000});
+        idleSwim1();
+    }
 
     /*
 
@@ -397,19 +420,19 @@
     */
 
             
-            async function idleSwim1() {
-                await Animate.to(my_sprite5,{
-                    x:300,y:320,
-                    duration:2000,
-                    easing:Animate.easeInOut
-                });
-                await Animate.to( my_sprite5,{
-                    x:300,y:280,
-                    duration:2000,
-                    easing:Animate.easeInOut
-                });
-                idleSwim1();
-            }
+            // async function idleSwim1() {
+            //     await Animate.to(my_sprite5,{
+            //         x:300,y:320,
+            //         duration:2000,
+            //         easing:Animate.easeInOut
+            //     });
+            //     await Animate.to( my_sprite5,{
+            //         x:300,y:280,
+            //         duration:2000,
+            //         easing:Animate.easeInOut
+            //     });
+            //     idleSwim1();
+            // }
             // idleSwim1();
 
             // async function idleSwim2() {
@@ -464,7 +487,8 @@
         loop();
 
     };
-    moveAround();
+    // moveAround();
+    idleSwim1();
 
     /*
 
