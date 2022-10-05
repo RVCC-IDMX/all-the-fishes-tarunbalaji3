@@ -470,7 +470,7 @@
                 if (delta >= 1 || end.duration === 0) {
                     obj.x = end.x;
                     obj.y = end.y;
-                    console.log("Done!");
+                    // console.log("Done!");
                     
                     resolve();
                     return;
@@ -633,13 +633,15 @@
         await Animate.to( my_sprite5,{x:10,y:200,duration:3000});
       }
 
-      // let swimTo = async () => {
-      //   Animate.from( my_sprite8,{x:500,y:150});
-      //   await Animate.to( my_sprite8,{x:e.data.global.x,y:e.data.global.y,duration:4000});
-      //   await Animate.to( my_sprite8,{x:500,y:150,duration:3000});
-      // }
-
-      // app.on('mousedown', swimTo());
+      // Tap on glass Fish
+      
+      app.renderer.view.addEventListener('click', async function(e) {
+        var xCoord = e.clientX;
+        var yCoord = e.clientY;
+        Animate.from( my_sprite8,{x:500,y:150});
+        await Animate.to( my_sprite8,{x:xCoord,y:yCoord,duration:3000});
+        await Animate.to( my_sprite8,{x:500,y:150,duration:3000});
+      });
 
       // Idle Swimming Fish
       function fishSwim() {
@@ -663,15 +665,9 @@
       }
 
       let bobFish = fishSwim();
-      // bobFish.x = 0;
-      // bobFish.y = 0;
-
       app.stage.addChild(bobFish);
 
       moveAround();
-
-      
-
       
     </script>
   </body>
