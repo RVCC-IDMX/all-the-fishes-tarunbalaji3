@@ -449,10 +449,6 @@
             let start = {
                 x : obj.x,
                 y : obj.y,
-                tint : obj.tint,  
-                scale: obj.scale,
-                alpha: obj.alpha,
-                angle: obj.angle,
             }
 
             //Set some defaults
@@ -491,14 +487,37 @@
                 //Lerp our y coordinate
                 obj.y = lerp(start.y,end.y,ease);
 
-                // Tint 
-                if (delta >= 1 || end.duration === 0) {
-                    obj.tint = 0xffffff * Math.random();
-                    console.log("Color Done!");
-                    
-                    resolve();
-                    return;
-                }
+                //Start the loop going!
+                obj.animationID = requestAnimationFrame(loop);
+
+            }
+            cancelAnimationFrame(obj.animationID);
+            loop();
+        //End Promise
+        });
+
+      };
+
+      Animate.scale = function(obj,end) {
+        //Make it a promise:
+        return new Promise( (resolve,reject) => {
+
+            let start = {
+                scale: obj.scale,
+            }
+
+            //Set some defaults
+            if (end.duration == undefined) end.duration = 0;
+            if (end.easing == undefined) end.easing = Animate.easeInOut;
+
+            var startTime = Date.now();
+
+            function loop() {
+
+                //Calculate our delta
+                let ticker = Date.now() - startTime;
+                let delta = ticker/end.duration;
+                let ease = end.easing(delta);
 
                 // Scale 
                 if (delta >= 1 || end.duration === 0) {
@@ -508,6 +527,35 @@
                     resolve();
                     return;
                 }
+                //Start the loop going!
+                obj.animationID = requestAnimationFrame(loop);
+
+            }
+            cancelAnimationFrame(obj.animationID);
+            loop();
+        //End Promise
+        });
+
+      };
+
+      Animate.alpha = function(obj,end) {
+        //Make it a promise:
+        return new Promise( (resolve,reject) => {
+            let start = {
+                alpha: obj.alpha,
+            }
+
+            if (end.duration == undefined) end.duration = 0;
+            if (end.easing == undefined) end.easing = Animate.easeInOut;
+
+            var startTime = Date.now();
+
+            function loop() {
+
+                //Calculate our delta
+                let ticker = Date.now() - startTime;
+                let delta = ticker/end.duration;
+                let ease = end.easing(delta);
 
                 // Alpha 
                 if (delta >= 1 || end.duration === 0) {
@@ -517,6 +565,34 @@
                     resolve();
                     return;
                 }
+                obj.animationID = requestAnimationFrame(loop);
+
+            }
+            cancelAnimationFrame(obj.animationID);
+
+            loop();
+        });
+
+      };
+
+      Animate.angle = function(obj,end) {
+        return new Promise( (resolve,reject) => {
+
+            let start = {
+                angle: obj.angle,
+            }
+
+            if (end.duration == undefined) end.duration = 0;
+            if (end.easing == undefined) end.easing = Animate.easeInOut;
+
+            var startTime = Date.now();
+
+            function loop() {
+
+                //Calculate our delta
+                let ticker = Date.now() - startTime;
+                let delta = ticker/end.duration;
+                let ease = end.easing(delta);
 
                 // Angle 
                 if (delta >= 1 || end.duration === 0) {
@@ -528,18 +604,11 @@
                     resolve();
                     return;
                 }
-
-
-                //Start the loop going!
                 obj.animationID = requestAnimationFrame(loop);
 
             }
-            //Clear the animation ID so there aren't competing loops
             cancelAnimationFrame(obj.animationID);
-
-            //Begin the loop!
             loop();
-        //End Promise
         });
 
       };
@@ -563,6 +632,14 @@
         await Animate.to( my_sprite5,{x:300,y:-180,duration:4000});
         await Animate.to( my_sprite5,{x:10,y:200,duration:3000});
       }
+
+      // let swimTo = async () => {
+      //   Animate.from( my_sprite8,{x:500,y:150});
+      //   await Animate.to( my_sprite8,{x:e.data.global.x,y:e.data.global.y,duration:4000});
+      //   await Animate.to( my_sprite8,{x:500,y:150,duration:3000});
+      // }
+
+      // app.on('mousedown', swimTo());
 
       // Idle Swimming Fish
       function fishSwim() {
